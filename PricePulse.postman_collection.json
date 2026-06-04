@@ -1,0 +1,106 @@
+{
+  "info": {
+    "name": "PricePulse",
+    "description": "Collection Postman pour l'API PricePulse - Smart Price Tracker",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Health Check",
+      "request": {
+        "method": "GET",
+        "url": {
+          "raw": "{{BASE_URL}}/api/health",
+          "host": ["{{BASE_URL}}"],
+          "path": ["api", "health"]
+        },
+        "description": "Vérifier que l'API est en ligne"
+      }
+    },
+    {
+      "name": "List Products",
+      "request": {
+        "method": "GET",
+        "url": {
+          "raw": "{{BASE_URL}}/api/products?page=1&limit=20",
+          "host": ["{{BASE_URL}}"],
+          "path": ["api", "products"],
+          "query": [
+            { "key": "page", "value": "1" },
+            { "key": "limit", "value": "20" }
+          ]
+        },
+        "description": "Récupérer la liste paginée des produits suivis"
+      }
+    },
+    {
+      "name": "Add Product",
+      "request": {
+        "method": "POST",
+        "header": [
+          { "key": "Content-Type", "value": "application/json" }
+        ],
+        "url": {
+          "raw": "{{BASE_URL}}/api/products",
+          "host": ["{{BASE_URL}}"],
+          "path": ["api", "products"]
+        },
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"url\": \"https://example.com/product/123\",\n  \"name\": \"Mon Produit\",\n  \"price\": 29.99\n}"
+        },
+        "description": "Ajouter un nouveau produit à suivre"
+      }
+    },
+    {
+      "name": "Get Product",
+      "request": {
+        "method": "GET",
+        "url": {
+          "raw": "{{BASE_URL}}/api/products/{{PRODUCT_ID}}",
+          "host": ["{{BASE_URL}}"],
+          "path": ["api", "products", "{{PRODUCT_ID}}"]
+        },
+        "description": "Obtenir le détail d'un produit par son ID (remplacer PRODUCT_ID)"
+      }
+    },
+    {
+      "name": "Delete Product",
+      "request": {
+        "method": "DELETE",
+        "url": {
+          "raw": "{{BASE_URL}}/api/products/{{PRODUCT_ID}}",
+          "host": ["{{BASE_URL}}"],
+          "path": ["api", "products", "{{PRODUCT_ID}}"]
+        },
+        "description": "Supprimer un produit du suivi"
+      }
+    },
+    {
+      "name": "Price History",
+      "request": {
+        "method": "GET",
+        "url": {
+          "raw": "{{BASE_URL}}/api/products/{{PRODUCT_ID}}/history",
+          "host": ["{{BASE_URL}}"],
+          "path": ["api", "products", "{{PRODUCT_ID}}", "history"]
+        },
+        "description": "Obtenir l'historique des prix d'un produit"
+      }
+    }
+  ],
+  "variable": [
+    {
+      "key": "BASE_URL",
+      "value": "http://localhost:5173",
+      "type": "string",
+      "description": "URL de base de l'application (via proxy nginx Docker)"
+    },
+    {
+      "key": "PRODUCT_ID",
+      "value": "",
+      "type": "string",
+      "description": "UUID du produit (remplacer après avoir ajouté un produit)"
+    }
+  ]
+}

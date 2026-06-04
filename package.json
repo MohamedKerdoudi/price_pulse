@@ -1,0 +1,14 @@
+{
+  "name": "pricepulse",
+  "private": true,
+  "version": "1.0.0",
+  "scripts": {
+    "test:watch": "npx concurrently --kill-others \"cd backend && npm run test:unit -- --watch\" \"cd frontend && npm run test:watch\"",
+    "test:unit": "cd backend && npm test && cd ../frontend && npm test",
+    "test:e2e": "cd backend && npx playwright test",
+    "test:all": "cd backend && npm test && cd ../frontend && npm test && cd ../backend && npm run test:e2e"
+  },
+  "devDependencies": {
+    "concurrently": "^9.1.0"
+  }
+}

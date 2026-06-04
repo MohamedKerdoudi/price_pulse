@@ -1,6 +1,8 @@
 import type { ProductResponse, CreateProductDTO, PaginatedResponse, ApiError } from '../types';
 
-const API_BASE = '/api';
+const BASE_URL = process.env.VITE_API_URL || 'http://localhost:3001';
+const API_BASE = `${BASE_URL}/api`;
+
 
 class ApiClientError extends Error {
   statusCode: number;
